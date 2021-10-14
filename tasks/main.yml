@@ -1,0 +1,36 @@
+---
+
+- name: Install packages
+  yum:
+    name: "{{ unbound_packages }}"
+
+- name: Create configuration from template
+  template:
+    src: unbound.conf.j2
+    dest: "{{ unbound_etc_dir }}/unbound.conf"
+    mode: '0644'
+  notify: Restart unbound
+
+- name: Download the list of root servers
+  get_url:
+    url: https://www.internic.net/domain/named.root
+    dest: "{{ unbound_etc_dir }}/root.hints"
+    mode: '0644'
+  notify: Restart unbound
+
+- name: Start/enable the daemon
+  systemd:
+    name: unbound
+    enabled: True
+    state: started
+
+- name: Open firewall port
+  firewalld:
+    port: "{{ item }}"
+    #zone: public
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop:
+    - 53/udp
+    - 53/tcp

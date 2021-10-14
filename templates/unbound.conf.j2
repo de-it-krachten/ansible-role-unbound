@@ -1,0 +1,17 @@
+server:
+  interface: {{ unbound_interface }}
+{% for ac in unbound_access_control %}
+  access-control: {{ ac }}
+{% endfor %}
+  root-hints: root.hints
+  use-syslog: no
+  verbosity: 1
+  log-queries: yes
+{% for lz in unbound_local_zones %}
+  local-zone: "{{ lz }}." nodefault
+{% endfor %}
+{% for zone in unbound_forward_zones %}
+forward-zone:
+  name: "{{ zone.name }}."
+  forward-addr: {{ zone.forwardaddr }}
+{% endfor %}
