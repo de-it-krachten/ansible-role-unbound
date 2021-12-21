@@ -3,6 +3,7 @@ server:
 {% for ac in unbound_access_control %}
   access-control: {{ ac }}
 {% endfor %}
+  do-ip6: {{ 'yes' if unbound_do_ip6|bool else 'no' }}
   root-hints: root.hints
   use-syslog: no
   verbosity: 1

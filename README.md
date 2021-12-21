@@ -1,5 +1,28 @@
----
+[![CI](https://github.com/de-it-krachten/ansible-role-unbound/workflows/CI/badge.svg?event=push)](https://github.com/de-it-krachten/ansible-role-unbound/actions?query=workflow%3ACI)
 
+
+# ansible-role-unbound
+
+Installs & configures unbound 
+
+
+Platforms
+--------------
+
+Supported platforms
+
+- CentOS 7
+- CentOS 8
+- Debian 10 (Buster)
+- Debian 11 (Bullseye)
+- Ubuntu 18.04 LTS
+- Ubuntu 20.04 LTS
+
+
+
+Role Variables
+--------------
+<pre><code>
 # Main configuration directory
 unbound_etc_dir: /etc/unbound
 
@@ -58,3 +81,24 @@ unbound_firewall: true
 #   - { port: 53, proto: tcp }
 #   - { port: 53, proto: udp }
 unbound_firewall_ports: []
+</pre></code>
+
+
+Example Playbook
+----------------
+
+<pre><code>
+- name: Converge
+  hosts: all
+  vars:
+    unbound_do_ip6: false
+    unbound_firewall_ports:
+      - port: '53'
+        proto: tcp
+      - port: '53'
+        proto: udp
+  tasks:
+    - name: Include role 'ansible-role-unbound'
+      include_role:
+        name: ansible-role-unbound
+</pre></code>

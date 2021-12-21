@@ -1,7 +1,7 @@
 ---
 
 - name: Install packages
-  yum:
+  package:
     name: "{{ unbound_packages }}"
 
 - name: Create configuration from template
@@ -21,16 +21,12 @@
 - name: Start/enable the daemon
   systemd:
     name: unbound
-    enabled: True
+    enabled: true
     state: started
 
 - name: Open firewall port
-  firewalld:
-    port: "{{ item }}"
-    #zone: public
-    permanent: yes
-    immediate: yes
-    state: enabled
-  loop:
-    - 53/udp
-    - 53/tcp
+  include_role:
+    name: firewall
+  vars:
+    firewall_ports: "{{ unbound_firewall_ports }}"
+  when: unbound_firewall|bool
