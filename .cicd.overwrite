@@ -1,0 +1,15 @@
+generic:
+  role_description: |
+    Installs & configures unbound 
+molecule:
+  converge:
+    vars:
+      unbound_do_ip6: 'no'
+      unbound_firewall_ports:
+        - port: '53'
+          proto: tcp
+        - port: '53'
+          proto: udp
+  prepare:
+    vars:
+      prepare_firewall: true

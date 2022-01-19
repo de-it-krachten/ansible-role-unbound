@@ -13,6 +13,8 @@ Supported platforms
 
 - CentOS 7
 - CentOS 8
+- RockyLinux 8
+- AlmaLinux 8
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
 - Ubuntu 18.04 LTS
@@ -88,17 +90,13 @@ Example Playbook
 ----------------
 
 <pre><code>
-- name: Converge
+- name: sample playbook for role 'unbound'
   hosts: all
   vars:
-    unbound_do_ip6: false
-    unbound_firewall_ports:
-      - port: '53'
-        proto: tcp
-      - port: '53'
-        proto: udp
+    unbound_do_ip6: no
+    unbound_firewall_ports: [{'port': '53', 'proto': 'tcp'}, {'port': '53', 'proto': 'udp'}]
   tasks:
-    - name: Include role 'ansible-role-unbound'
+    - name: Include role 'unbound'
       include_role:
-        name: ansible-role-unbound
+        name: unbound
 </pre></code>
