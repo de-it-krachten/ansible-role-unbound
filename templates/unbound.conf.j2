@@ -1,4 +1,5 @@
 server:
+  include: {{ unbound_etc_dir }}/local.d/*.conf
   interface: {{ unbound_interface }}
 {% for ac in unbound_access_control %}
   access-control: {{ ac }}
