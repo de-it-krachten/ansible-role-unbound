@@ -1,7 +1,13 @@
+---
+
 generic:
   role_description: |
     Installs & configures unbound 
+
 molecule:
+  prepare:
+    vars:
+      prepare_firewall: true
   converge:
     vars:
       unbound_do_ip6: 'no'
@@ -10,6 +16,3 @@ molecule:
           proto: tcp
         - port: '53'
           proto: udp
-  prepare:
-    vars:
-      prepare_firewall: true
