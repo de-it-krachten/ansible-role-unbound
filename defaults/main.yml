@@ -24,6 +24,9 @@ unbound_access_control: []
 # List of forward zone
 unbound_forward_zones: []
 
+# List of custom records (name, ip, cnames)
+unbound_custom_records: []
+
 # Lsit of local zones
 unbound_local_zones:
   - 10.in-addr.arpa

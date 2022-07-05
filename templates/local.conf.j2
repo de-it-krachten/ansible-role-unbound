@@ -1,0 +1,18 @@
+# A records
+{% for record in unbound_custom_records %}
+local-data: "{{ record.name }} A {{ record.ip }}"
+{% endfor %}
+
+# PTR records
+{% for record in unbound_custom_records %}
+local-data-ptr: "{{ record.ip }} {{ record.name }}"
+{% endfor %}
+
+# CNAME records
+{% for record in unbound_custom_records %}
+{% if record.cnames is defined %}
+{% for cname in record.cnames %}
+local-data: "{{ cname }} CNAME {{ record.name }}"
+{% endfor %}
+{% endif %}
+{% endfor %}
