@@ -4,6 +4,11 @@ generic:
   role_description: |
     Installs & configures unbound 
 
+platforms:
+  alpine3:
+    ci: true
+    supported: true
+
 molecule:
   prepare:
     vars:
@@ -11,11 +16,7 @@ molecule:
   converge:
     vars:
       unbound_do_ip6: 'no'
-      unbound_firewall_ports:
-        - port: '53'
-          proto: tcp
-        - port: '53'
-          proto: udp
+      unbound_firewall: false
       unbound_custom_records:
         - name: server1.example.com
           ip: 192.168.56.100

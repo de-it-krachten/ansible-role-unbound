@@ -137,11 +137,12 @@ platforms:
     galaxy:
       name: Fedora
       version: all
-  alpine:
+  alpine3:
     name: Alpine 3
     ci: false
     supported: false
     image: "robertdebock/alpine:latest"
+    pre_build_image: false
     galaxy:
       name: Alpine
       version: all
@@ -192,6 +193,7 @@ gitlab:
 # molecule
 molecule:
   active: true
+  dns_server: false
   converge:
     playbooks: []
     vars: {}
@@ -206,6 +208,7 @@ molecule:
       - firewalld
       - iptables
       - ufw
+      - unbound
   nodes:
     - name: node1
       groups: []

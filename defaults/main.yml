@@ -60,7 +60,6 @@ unbound_service: unbound
 unbound_firewall: true
 
 # Firewall ports to open
-# unbound_firewall_ports:
-#   - { port: 53, proto: tcp }
-#   - { port: 53, proto: udp }
-unbound_firewall_ports: []
+unbound_firewall_ports:
+  - { port: 53, proto: tcp }
+  - { port: 53, proto: udp }

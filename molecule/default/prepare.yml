@@ -15,6 +15,7 @@
       - ubuntu1804
       - rhel7
       - centos7
+      - alpine3
 
     ufw_distros:
       - debian11
@@ -43,15 +44,14 @@
         state: directory
         mode: "0700"
 
-    - name: Define molecule distro (Ubuntu)
+    - name: Define molecule distro
       set_fact:
-        molecule_distro: "{{ (ansible_distribution|lower) + (ansible_distribution_version|regex_replace('\\.')) }}"
-      when: ansible_distribution == 'Ubuntu'
-
-    - name: Define molecule distro (Rest)
-      set_fact:
-        molecule_distro: "{{ (ansible_distribution|lower) + ansible_distribution_major_version }}"
-      when: ansible_distribution != 'Ubuntu'
+        molecule_distro: >-
+          {%- if ansible_distribution == 'Ubuntu' -%}
+          {{ (ansible_distribution|lower) + (ansible_distribution_version|regex_replace('\\.')) }}
+          {%- else -%}
+          {{ (ansible_distribution|lower) + ansible_distribution_major_version }}
+          {%- endif -%}
 
     - name: Show settings
       debug:
@@ -218,7 +218,9 @@
             name: firewalld
           when: molecule_distro in firewalld_distros
 
-      when: prepare_firewall is defined and prepare_firewall|bool
+      when:
+        - prepare_firewall is defined and prepare_firewall|bool
+        - inventory_hostname is not search('-dns$')
 
     - block:
 

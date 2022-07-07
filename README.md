@@ -25,6 +25,7 @@ Supported platforms
 - Ubuntu 22.04 LTS
 - Fedora 35
 - Fedora 36
+- Alpine 3
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -92,10 +93,9 @@ unbound_service: unbound
 unbound_firewall: true
 
 # Firewall ports to open
-# unbound_firewall_ports:
-#   - { port: 53, proto: tcp }
-#   - { port: 53, proto: udp }
-unbound_firewall_ports: []
+unbound_firewall_ports:
+  - { port: 53, proto: tcp }
+  - { port: 53, proto: udp }
 </pre></code>
 
 ### vars/family-RedHat.yml
@@ -109,10 +109,16 @@ unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 
 </pre></code>
 
+### vars/Alpine.yml
+<pre><code>
+# Drop-in configuration directory
+unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
+</pre></code>
+
 ### vars/family-Debian.yml
 <pre><code>
 # Drop-in configuration directory
-unbound_confd_dir: "{{ unbound_etc_dir }}/unbound.conf.d"
+unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 </pre></code>
 
 
@@ -124,7 +130,7 @@ unbound_confd_dir: "{{ unbound_etc_dir }}/unbound.conf.d"
   hosts: all
   vars:
     unbound_do_ip6: no
-    unbound_firewall_ports: [{'port': '53', 'proto': 'tcp'}, {'port': '53', 'proto': 'udp'}]
+    unbound_firewall: False
     unbound_custom_records: [{'name': 'server1.example.com', 'ip': '192.168.56.100', 'cnames': ['test.example.com', 'test1.example.com']}, {'name': 'server2.example.com', 'ip': '192.168.56.101'}]
   tasks:
     - name: Include role 'unbound'

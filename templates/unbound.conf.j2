@@ -5,7 +5,7 @@ server:
   access-control: {{ ac }}
 {% endfor %}
   do-ip6: {{ 'yes' if unbound_do_ip6|bool else 'no' }}
-  root-hints: root.hints
+  root-hints: {{ unbound_etc_dir }}/root.hints
   use-syslog: no
   verbosity: 1
   log-queries: yes
