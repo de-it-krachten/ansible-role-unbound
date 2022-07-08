@@ -6,26 +6,32 @@
 Installs & configures unbound 
 
 
-Platforms
---------------
+## Platforms
 
 Supported platforms
 
 - Red Hat Enterprise Linux 7<sup>1</sup>
 - Red Hat Enterprise Linux 8<sup>1</sup>
+- Red Hat Enterprise Linux 9<sup>1</sup>
 - CentOS 7
 - RockyLinux 8
-- AlmaLinux 8<sup>1</sup>
+- OracleLinux 8
+- AlmaLinux 8
+- AlmaLinux 9
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
+- Fedora 35
+- Fedora 36
+- Alpine 3
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
 
-Role Variables
---------------
+## Role Variables
+### defaults/main.yml
 <pre><code>
 # Main configuration directory
 unbound_etc_dir: /etc/unbound
@@ -50,6 +56,9 @@ unbound_access_control: []
 
 # List of forward zone
 unbound_forward_zones: []
+
+# List of custom records (name, ip, cnames)
+unbound_custom_records: []
 
 # Lsit of local zones
 unbound_local_zones:
@@ -84,22 +93,45 @@ unbound_service: unbound
 unbound_firewall: true
 
 # Firewall ports to open
-# unbound_firewall_ports:
-#   - { port: 53, proto: tcp }
-#   - { port: 53, proto: udp }
-unbound_firewall_ports: []
+unbound_firewall_ports:
+  - { port: 53, proto: tcp }
+  - { port: 53, proto: udp }
+</pre></code>
+
+### vars/family-RedHat.yml
+<pre><code>
+# Drop-in configuration directory
+unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
+</pre></code>
+
+### vars/default.yml
+<pre><code>
+
+</pre></code>
+
+### vars/Alpine.yml
+<pre><code>
+# Drop-in configuration directory
+unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
+</pre></code>
+
+### vars/family-Debian.yml
+<pre><code>
+# Drop-in configuration directory
+unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 </pre></code>
 
 
-Example Playbook
-----------------
 
+## Example Playbook
+### molecule/default/converge.yml
 <pre><code>
 - name: sample playbook for role 'unbound'
   hosts: all
   vars:
     unbound_do_ip6: no
-    unbound_firewall_ports: [{'port': '53', 'proto': 'tcp'}, {'port': '53', 'proto': 'udp'}]
+    unbound_firewall: False
+    unbound_custom_records: [{'name': 'server1.example.com', 'ip': '192.168.56.100', 'cnames': ['test.example.com', 'test1.example.com']}, {'name': 'server2.example.com', 'ip': '192.168.56.101'}]
   tasks:
     - name: Include role 'unbound'
       include_role:

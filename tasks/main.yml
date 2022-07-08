@@ -24,6 +24,21 @@
     mode: '0644'
   notify: Restart unbound
 
+- name: Create drop-in configuration locations
+  file:
+    path: "{{ unbound_confd_dir }}"
+    state: directory
+    owner: root
+    group: unbound
+    mode: "0755"
+
+- name: Create local configuration file
+  template:
+    src: local.conf.j2
+    dest: "{{ unbound_confd_dir }}/local.conf"
+    mode: '0644'
+  notify: Restart unbound
+
 - name: Download the list of root servers
   get_url:
     url: https://www.internic.net/domain/named.root
@@ -32,7 +47,7 @@
   notify: Restart unbound
 
 - name: Start/enable the daemon
-  systemd:
+  service:
     name: unbound
     enabled: true
     state: started
