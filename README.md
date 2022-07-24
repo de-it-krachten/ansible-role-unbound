@@ -15,6 +15,7 @@ Supported platforms
 - Red Hat Enterprise Linux 9<sup>1</sup>
 - CentOS 7
 - RockyLinux 8
+- RockyLinux 9
 - OracleLinux 8
 - AlmaLinux 8
 - AlmaLinux 9
@@ -128,6 +129,7 @@ unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 <pre><code>
 - name: sample playbook for role 'unbound'
   hosts: all
+  become: "{{ molecule['converge']['become'] | default('yes') }}"
   vars:
     unbound_do_ip6: no
     unbound_firewall: False
