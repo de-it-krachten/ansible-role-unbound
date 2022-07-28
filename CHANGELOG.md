@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.2.0...v1.3.0) (2022-07-28)
+
+
+### Features
+
+* Implement ansible-lint v6 support ([1547143](https://github.com/de-it-krachten/ansible-role-unbound/commit/154714342f5bb03c90c8b6ca729e985bbf61b4ff))
+
 # [1.2.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.1.0...v1.2.0) (2022-07-08)
 
 
