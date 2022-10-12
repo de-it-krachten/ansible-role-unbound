@@ -1,3 +1,11 @@
+# [1.4.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.3.0...v1.4.0) (2022-10-12)
+
+
+### Features
+
+* Move to FQCN ([7dfaf17](https://github.com/de-it-krachten/ansible-role-unbound/commit/7dfaf17aee68d22db520be4810ee868711adf140))
+* Update CI to latest standards ([2392f1f](https://github.com/de-it-krachten/ansible-role-unbound/commit/2392f1f2bef1ac1bd1bd91067098e870c129f495))
+
 # [1.3.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.2.0...v1.3.0) (2022-07-28)
 
 
