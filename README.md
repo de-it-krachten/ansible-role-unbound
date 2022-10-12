@@ -6,6 +6,15 @@
 Installs & configures unbound 
 
 
+
+## Dependencies
+
+#### Roles
+None
+
+#### Collections
+- community.general
+
 ## Platforms
 
 Supported platforms
@@ -99,6 +108,7 @@ unbound_firewall_ports:
   - { port: 53, proto: udp }
 </pre></code>
 
+
 ### vars/family-RedHat.yml
 <pre><code>
 # Drop-in configuration directory
@@ -136,6 +146,6 @@ unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
     unbound_custom_records: [{'name': 'server1.example.com', 'ip': '192.168.56.100', 'cnames': ['test.example.com', 'test1.example.com']}, {'name': 'server2.example.com', 'ip': '192.168.56.101'}]
   tasks:
     - name: Include role 'unbound'
-      include_role:
+      ansible.builtin.include_role:
         name: unbound
 </pre></code>

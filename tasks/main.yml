@@ -1,7 +1,7 @@
 ---
 
 - name: Load variables based on OS type
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -14,18 +14,18 @@
         - 'vars'
 
 - name: Install packages
-  package:
+  ansible.builtin.package:
     name: "{{ unbound_packages }}"
 
 - name: Create configuration from template
-  template:
+  ansible.builtin.template:
     src: unbound.conf.j2
     dest: "{{ unbound_etc_dir }}/unbound.conf"
     mode: '0644'
   notify: Restart unbound
 
 - name: Create drop-in configuration locations
-  file:
+  ansible.builtin.file:
     path: "{{ unbound_confd_dir }}"
     state: directory
     owner: root
@@ -33,27 +33,27 @@
     mode: "0755"
 
 - name: Create local configuration file
-  template:
+  ansible.builtin.template:
     src: local.conf.j2
     dest: "{{ unbound_confd_dir }}/local.conf"
     mode: '0644'
   notify: Restart unbound
 
 - name: Download the list of root servers
-  get_url:
+  ansible.builtin.get_url:
     url: https://www.internic.net/domain/named.root
     dest: "{{ unbound_etc_dir }}/root.hints"
     mode: '0644'
   notify: Restart unbound
 
 - name: Start/enable the daemon
-  service:
+  ansible.builtin.service:
     name: unbound
     enabled: true
     state: started
 
 - name: Open firewall port
-  include_role:
+  ansible.builtin.include_role:
     name: firewall
   vars:
     firewall_ports: "{{ unbound_firewall_ports }}"
