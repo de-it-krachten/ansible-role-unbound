@@ -26,6 +26,7 @@ Supported platforms
 - RockyLinux 8
 - RockyLinux 9
 - OracleLinux 8
+- OracleLinux 9
 - AlmaLinux 8
 - AlmaLinux 9
 - Debian 10 (Buster)
@@ -33,8 +34,8 @@ Supported platforms
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 35
 - Fedora 36
+- Fedora 37
 - Alpine 3
 
 Note:
@@ -139,7 +140,7 @@ unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 <pre><code>
 - name: sample playbook for role 'unbound'
   hosts: all
-  become: "{{ molecule['converge']['become'] | default('yes') }}"
+  become: "yes"
   vars:
     unbound_do_ip6: no
     unbound_firewall: False

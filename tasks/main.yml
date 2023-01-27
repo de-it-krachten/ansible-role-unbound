@@ -54,7 +54,7 @@
 
 - name: Open firewall port
   ansible.builtin.include_role:
-    name: firewall
+    name: deitkrachten.firewall
   vars:
     firewall_ports: "{{ unbound_firewall_ports }}"
   when: unbound_firewall|bool
