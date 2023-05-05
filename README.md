@@ -110,15 +110,16 @@ unbound_firewall_ports:
 </pre></code>
 
 
-### vars/family-RedHat.yml
+### vars/family-Debian.yml
 <pre><code>
 # Drop-in configuration directory
 unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 </pre></code>
 
-### vars/default.yml
+### vars/family-RedHat.yml
 <pre><code>
-
+# Drop-in configuration directory
+unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 </pre></code>
 
 ### vars/Alpine.yml
@@ -127,10 +128,9 @@ unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 </pre></code>
 
-### vars/family-Debian.yml
+### vars/default.yml
 <pre><code>
-# Drop-in configuration directory
-unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
+
 </pre></code>
 
 
