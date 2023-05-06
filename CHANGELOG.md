@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.4.0...v1.5.0) (2023-05-06)
+
+
+### Features
+
+* Move to namespaced role names ([66f2822](https://github.com/de-it-krachten/ansible-role-unbound/commit/66f2822fdf73970771191e781cdf4033c727a309))
+
 # [1.4.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.3.0...v1.4.0) (2022-10-12)
 
 
