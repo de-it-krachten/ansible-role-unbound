@@ -1,4 +1,0 @@
----
-
-# Drop-in configuration directory
-unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"

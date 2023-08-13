@@ -29,13 +29,15 @@ Supported platforms
 - OracleLinux 9
 - AlmaLinux 8
 - AlmaLinux 9
-- Debian 10 (Buster)
+- SUSE Linux Enterprise 15<sup>1</sup>
+- openSUSE Leap 15
+- Debian 10 (Buster)<sup>1</sup>
 - Debian 11 (Bullseye)
-- Ubuntu 18.04 LTS
+- Debian 12 (Bookworm)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 36
 - Fedora 37
+- Fedora 38
 - Alpine 3
 
 Note:
@@ -48,7 +50,11 @@ Note:
 unbound_etc_dir: /etc/unbound
 
 # Drop-in configuration directory
-unbound_confd_dir: "{{ unbound_etc_dir }}/unbound.conf.d"
+unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
+# unbound_confd_dir: "{{ unbound_etc_dir }}/unbound.conf.d"
+
+# unbound pid file
+unbound_pid_file: /run/unbound.pid
 
 # Root hints file
 unbound_hints_local: "{{ unbound_etc_dir }}/root.hints"
@@ -109,29 +115,6 @@ unbound_firewall_ports:
   - { port: 53, proto: udp }
 </pre></code>
 
-
-### vars/family-Debian.yml
-<pre><code>
-# Drop-in configuration directory
-unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
-</pre></code>
-
-### vars/family-RedHat.yml
-<pre><code>
-# Drop-in configuration directory
-unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
-</pre></code>
-
-### vars/Alpine.yml
-<pre><code>
-# Drop-in configuration directory
-unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
-</pre></code>
-
-### vars/default.yml
-<pre><code>
-
-</pre></code>
 
 
 
