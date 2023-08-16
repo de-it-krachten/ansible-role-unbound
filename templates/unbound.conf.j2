@@ -1,4 +1,5 @@
 server:
+  pidfile: {{ unbound_pid_file }}
   include: {{ unbound_confd_dir }}/*.conf
   interface: {{ unbound_interface }}
 {% for ac in unbound_access_control %}

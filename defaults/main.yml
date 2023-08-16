@@ -4,7 +4,11 @@
 unbound_etc_dir: /etc/unbound
 
 # Drop-in configuration directory
-unbound_confd_dir: "{{ unbound_etc_dir }}/unbound.conf.d"
+unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
+# unbound_confd_dir: "{{ unbound_etc_dir }}/unbound.conf.d"
+
+# unbound pid file
+unbound_pid_file: /run/unbound.pid
 
 # Root hints file
 unbound_hints_local: "{{ unbound_etc_dir }}/root.hints"
