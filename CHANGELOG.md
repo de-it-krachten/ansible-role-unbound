@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.6.0...v1.6.1) (2023-09-22)
+
+
+### Bug Fixes
+
+* Fix loop label to string ([cc1ce4c](https://github.com/de-it-krachten/ansible-role-unbound/commit/cc1ce4c2a9f6540c0b2c73e8ce28629ff2caa14e))
+
 # [1.6.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.5.0...v1.6.0) (2023-08-16)
 
 
