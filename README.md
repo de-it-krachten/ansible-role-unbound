@@ -13,7 +13,7 @@ Installs & configures unbound
 None
 
 #### Collections
-- community.general
+None
 
 ## Platforms
 
@@ -31,13 +31,13 @@ Supported platforms
 - AlmaLinux 9
 - SUSE Linux Enterprise 15<sup>1</sup>
 - openSUSE Leap 15
-- Debian 10 (Buster)<sup>1</sup>
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 37
-- Fedora 38
+- Ubuntu 24.04 LTS
+- Fedora 39
+- Fedora 40
 - Alpine 3
 
 Note:
@@ -123,11 +123,18 @@ unbound_firewall_ports:
 <pre><code>
 - name: sample playbook for role 'unbound'
   hosts: all
-  become: "yes"
+  become: 'yes'
   vars:
-    unbound_do_ip6: no
-    unbound_firewall: False
-    unbound_custom_records: [{'name': 'server1.example.com', 'ip': '192.168.56.100', 'cnames': ['test.example.com', 'test1.example.com']}, {'name': 'server2.example.com', 'ip': '192.168.56.101'}]
+    unbound_do_ip6: 'no'
+    unbound_firewall: false
+    unbound_custom_records:
+      - name: server1.example.com
+        ip: 192.168.56.100
+        cnames:
+          - test.example.com
+          - test1.example.com
+      - name: server2.example.com
+        ip: 192.168.56.101
   tasks:
     - name: Include role 'unbound'
       ansible.builtin.include_role:
