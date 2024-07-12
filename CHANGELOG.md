@@ -1,3 +1,12 @@
+# [1.7.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.6.1...v1.7.0) (2024-07-12)
+
+
+### Features
+
+* Add support for Ubuntu 24.04 LTS + Fedora 40 ([ad2cf77](https://github.com/de-it-krachten/ansible-role-unbound/commit/ad2cf77a5b9aed0b8f1ac3fcc65d93399301e098))
+* Disable remote control (by default) ([c4a1761](https://github.com/de-it-krachten/ansible-role-unbound/commit/c4a17612e0ea19914e0e5815e3ffff4f94d9e000))
+* Remove support for RHEL/CentOS 7 ([d907b89](https://github.com/de-it-krachten/ansible-role-unbound/commit/d907b89bb2120b8ced25d6e71fdb38f3ad338e3f))
+
 ## [1.6.1](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.6.0...v1.6.1) (2023-09-22)
 
 
