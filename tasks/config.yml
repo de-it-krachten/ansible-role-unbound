@@ -32,7 +32,9 @@
 - name: Enable remote control
   ansible.builtin.command:
     cmd: unbound-control-setup
+  changed_when: true
   notify: Restart unbound
+  tags: molecule-idempotence-notest
   when: unbound_remote_control | bool
 
 - name: Disable remote control
