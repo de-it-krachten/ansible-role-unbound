@@ -7,6 +7,9 @@ unbound_etc_dir: /etc/unbound
 unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 # unbound_confd_dir: "{{ unbound_etc_dir }}/unbound.conf.d"
 
+# Should remote control be enabled
+unbound_remote_control: false
+
 # unbound pid file
 unbound_pid_file: /run/unbound.pid
 

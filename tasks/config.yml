@@ -1,0 +1,58 @@
+---
+
+- name: Create configuration from template
+  ansible.builtin.template:
+    src: unbound.conf.j2
+    dest: "{{ unbound_etc_dir }}/unbound.conf"
+    mode: '0644'
+  notify: Restart unbound
+
+- name: Create drop-in configuration locations
+  ansible.builtin.file:
+    path: "{{ unbound_confd_dir }}"
+    state: directory
+    owner: root
+    group: unbound
+    mode: "0755"
+
+- name: Create local configuration file
+  ansible.builtin.template:
+    src: local.conf.j2
+    dest: "{{ unbound_confd_dir }}/local.conf"
+    mode: '0644'
+  notify: Restart unbound
+
+- name: Download the list of root servers
+  ansible.builtin.get_url:
+    url: https://www.internic.net/domain/named.root
+    dest: "{{ unbound_etc_dir }}/root.hints"
+    mode: '0644'
+  notify: Restart unbound
+
+- name: Enable remote control
+  ansible.builtin.command:
+    cmd: unbound-control-setup
+  changed_when: true
+  notify: Restart unbound
+  tags: molecule-idempotence-notest
+  when: unbound_remote_control | bool
+
+- name: Disable remote control
+  ansible.builtin.file:
+    path: "{{ unbound_etc_dir }}/conf.d/remote-control.conf"
+    state: absent
+  notify: Restart unbound
+  when: not unbound_remote_control | bool
+
+- name: Start/enable the daemon
+  ansible.builtin.service:
+    name: unbound
+    enabled: true
+    state: started
+
+- name: Open firewall port
+  ansible.builtin.include_role:
+    name: deitkrachten.firewall
+  vars:
+    firewall_ports: "{{ unbound_firewall_ports }}"
+  when: unbound_firewall|bool

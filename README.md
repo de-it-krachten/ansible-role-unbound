@@ -13,16 +13,14 @@ Installs & configures unbound
 None
 
 #### Collections
-- community.general
+None
 
 ## Platforms
 
 Supported platforms
 
-- Red Hat Enterprise Linux 7<sup>1</sup>
 - Red Hat Enterprise Linux 8<sup>1</sup>
 - Red Hat Enterprise Linux 9<sup>1</sup>
-- CentOS 7
 - RockyLinux 8
 - RockyLinux 9
 - OracleLinux 8
@@ -31,13 +29,13 @@ Supported platforms
 - AlmaLinux 9
 - SUSE Linux Enterprise 15<sup>1</sup>
 - openSUSE Leap 15
-- Debian 10 (Buster)<sup>1</sup>
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 37
-- Fedora 38
+- Ubuntu 24.04 LTS
+- Fedora 39
+- Fedora 40
 - Alpine 3
 
 Note:
@@ -52,6 +50,9 @@ unbound_etc_dir: /etc/unbound
 # Drop-in configuration directory
 unbound_confd_dir: "{{ unbound_etc_dir }}/conf.d"
 # unbound_confd_dir: "{{ unbound_etc_dir }}/unbound.conf.d"
+
+# Should remote control be enabled
+unbound_remote_control: false
 
 # unbound pid file
 unbound_pid_file: /run/unbound.pid
@@ -123,11 +124,18 @@ unbound_firewall_ports:
 <pre><code>
 - name: sample playbook for role 'unbound'
   hosts: all
-  become: "yes"
+  become: 'yes'
   vars:
-    unbound_do_ip6: no
-    unbound_firewall: False
-    unbound_custom_records: [{'name': 'server1.example.com', 'ip': '192.168.56.100', 'cnames': ['test.example.com', 'test1.example.com']}, {'name': 'server2.example.com', 'ip': '192.168.56.101'}]
+    unbound_do_ip6: 'no'
+    unbound_firewall: false
+    unbound_custom_records:
+      - name: server1.example.com
+        ip: 192.168.56.100
+        cnames:
+          - test.example.com
+          - test1.example.com
+      - name: server2.example.com
+        ip: 192.168.56.101
   tasks:
     - name: Include role 'unbound'
       ansible.builtin.include_role:
