@@ -3,48 +3,8 @@
 - name: Load variables based on OS type
   ansible.builtin.include_tasks: vars.yml
 
-- name: Install packages
-  ansible.builtin.package:
-    name: "{{ unbound_packages }}"
+- name: Installation phase
+  ansible.builtin.include_tasks: install.yml
 
-- name: Create configuration from template
-  ansible.builtin.template:
-    src: unbound.conf.j2
-    dest: "{{ unbound_etc_dir }}/unbound.conf"
-    mode: '0644'
-  notify: Restart unbound
-
-- name: Create drop-in configuration locations
-  ansible.builtin.file:
-    path: "{{ unbound_confd_dir }}"
-    state: directory
-    owner: root
-    group: unbound
-    mode: "0755"
-
-- name: Create local configuration file
-  ansible.builtin.template:
-    src: local.conf.j2
-    dest: "{{ unbound_confd_dir }}/local.conf"
-    mode: '0644'
-  notify: Restart unbound
-
-- name: Download the list of root servers
-  ansible.builtin.get_url:
-    url: https://www.internic.net/domain/named.root
-    dest: "{{ unbound_etc_dir }}/root.hints"
-    mode: '0644'
-  notify: Restart unbound
-
-- name: Start/enable the daemon
-  ansible.builtin.service:
-    name: unbound
-    enabled: true
-    state: started
-
-- name: Open firewall port
-  ansible.builtin.include_role:
-    name: deitkrachten.firewall
-  vars:
-    firewall_ports: "{{ unbound_firewall_ports }}"
-  when: unbound_firewall|bool
+- name: Configuration phase
+  ansible.builtin.include_tasks: config.yml
