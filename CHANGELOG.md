@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.7.0...v1.8.0) (2024-12-29)
+
+
+### Features
+
+* Update supported platforms & CI ([992eb2d](https://github.com/de-it-krachten/ansible-role-unbound/commit/992eb2db378948d50ca37aed265146a5fc8e9468))
+
 # [1.7.0](https://github.com/de-it-krachten/ansible-role-unbound/compare/v1.6.1...v1.7.0) (2024-07-12)
 
 
