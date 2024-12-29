@@ -34,8 +34,8 @@ Supported platforms
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
-- Fedora 39
 - Fedora 40
+- Fedora 41
 - Alpine 3
 
 Note:
