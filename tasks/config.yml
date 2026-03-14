@@ -44,11 +44,19 @@
   notify: Restart unbound
   when: not unbound_remote_control | bool
 
+- name: Setup unbound service
+  ansible.builtin.template:
+    src: unbound.service.j2
+    dest: /etc/systemd/system/unbound.service
+    mode: "0644"
+  when: ansible_virtualization_type in [ 'docker', 'container', 'containerd' ]
+
 - name: Start/enable the daemon
-  ansible.builtin.service:
+  ansible.builtin.systemd:
     name: unbound
     enabled: true
     state: started
+    daemon_reload: true
 
 - name: Open firewall port
   ansible.builtin.include_role:
