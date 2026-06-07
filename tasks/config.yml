@@ -49,7 +49,7 @@
     src: unbound.service.j2
     dest: /etc/systemd/system/unbound.service
     mode: "0644"
-  when: ansible_virtualization_type in [ 'docker', 'container', 'containerd' ]
+  when: ansible_facts.virtualization_type in [ 'docker', 'container', 'containerd' ]
 
 - name: Start/enable the daemon
   ansible.builtin.systemd:
