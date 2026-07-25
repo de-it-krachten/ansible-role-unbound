@@ -21,25 +21,29 @@ Supported platforms
 
 - Red Hat Enterprise Linux 8<sup>1</sup>
 - Red Hat Enterprise Linux 9<sup>1</sup>
+- Red Hat Enterprise Linux 10<sup>1</sup>
 - RockyLinux 8
 - RockyLinux 9
+- RockyLinux 10
 - OracleLinux 8
 - OracleLinux 9
+- OracleLinux 10
 - AlmaLinux 8
 - AlmaLinux 9
-- SUSE Linux Enterprise 15<sup>1</sup>
-- openSUSE Leap 15
+- AlmaLinux 10
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
-- Ubuntu 20.04 LTS
+- Debian 13 (Trixie)
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
-- Fedora 40
-- Fedora 41
+- Ubuntu 26.04 LTS
+- Fedora 43
+- Fedora 44<sup>1</sup>
 - Alpine 3
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
+
 
 ## Role Variables
 ### defaults/main.yml
@@ -126,6 +130,7 @@ unbound_firewall_ports:
   hosts: all
   become: 'yes'
   vars:
+    molecule_driver: '{{ lookup(''env'', ''MOLECULE_DRIVER_NAME'') }}'
     unbound_do_ip6: 'no'
     unbound_firewall: false
     unbound_custom_records:
