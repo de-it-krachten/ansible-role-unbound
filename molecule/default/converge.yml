@@ -4,6 +4,7 @@
   hosts: all
   become: "yes"
   vars:
+    molecule_driver: "{{ lookup('env', 'MOLECULE_DRIVER_NAME') }}"
     unbound_do_ip6: no
     unbound_firewall: False
     unbound_custom_records: [{'name': 'server1.example.com', 'ip': '192.168.56.100', 'cnames': ['test.example.com', 'test1.example.com']}, {'name': 'server2.example.com', 'ip': '192.168.56.101'}]

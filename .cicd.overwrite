@@ -4,10 +4,11 @@ generic:
   role_description: |
     Installs & configures unbound 
 
+# Supported platforms
 platforms:
   alpine3:
-    ci: true
     supported: true
+    ci: true
 
 molecule:
   prepare:

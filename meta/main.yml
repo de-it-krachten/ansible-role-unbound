@@ -1,5 +1,4 @@
 ---
-
 galaxy_info:
   role_name: unbound
   namespace: de_it_krachten
@@ -13,16 +12,13 @@ galaxy_info:
       versions:
         - '8'
         - '9'
-    - name: opensuse
-      versions:
-        - all
+        - '10'
     - name: Debian
       versions:
-        - bullseye
         - bookworm
+        - trixie
     - name: Ubuntu
       versions:
-        - focal
         - jammy
     - name: Fedora
       versions:
